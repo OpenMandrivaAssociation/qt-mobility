@@ -1,0 +1,297 @@
+# Build examples
+%bcond_without examples
+# Build demos
+%bcond_without demos
+
+%define macro 1
+%define libname %mklibname %{name} %{macro}
+%define libnamedev %mklibname %{name} -d
+
+%define _qt4_datadir		%{_prefix}/lib/qt4
+%define _qt4_bindir		%{_qt4_datadir}/bin
+%define _qt4_docdir		%{_docdir}/qt4
+%define _qt4_libdir		%{_libdir}
+%define _qt4_includedir		%{_qt4_datadir}/include
+%define _qt4_plugindir		%{_libdir}/qt4/plugins
+%define _qt4_demodir		%{_qt4_datadir}/demos
+%define _qt4_exampledir		%{_qt4_datadir}/examples
+%define _qt4_importdir		%{_qt4_datadir}/imports
+%define _qt4_translationdir	%{_qt4_datadir}/translations
+
+
+Name:		qt-mobility
+Summary:		Qt Mobility Framework
+Group:		Development/Other
+Version:		1.2.0
+Release:		1
+License:		LGPLv2 with exceptions
+URL:		http://qt.nokia.com/products/qt-addons/mobility 
+Source0:		http://get.qt.nokia.com/qt/add-ons/%{name}-opensource-src-%{version}.tar.gz
+Patch1:		qt-mobility-opensource-src-1.1.0-pulseaudio-lib.patch
+Patch2:		qt-mobility-1.2.0-no-rpath.patch
+
+BuildRequires:	alsa-lib-devel
+BuildRequires:	bluez-devel
+BuildRequires:	libblkid-devel
+BuildRequires:	libgstreamer-plugins-base-devel
+BuildRequires:	libxrandr-devel
+BuildRequires:	libxv-devel
+BuildRequires:	networkmanager-devel
+BuildRequires:	pulseaudio-devel
+BuildRequires:	udev-devel
+BuildRequires:	qt4-devel
+BuildRequires:	gdb
+# WARNING: still isnt possible to build against qmf
+BuildConflicts:	qmf-devel
+Provides:	qt4-mobility = %{version}-%{release}
+Requires:	%{libname} = %{version}-%{release}
+
+%description
+Qt Mobility Project delivers a set of new APIs to Qt with features that are well
+known from the mobile device world, in particular phones. However, these APIs
+allow the developer to use these features with ease from one framework and apply
+them to phones, netbooks and non-mobile personal computers. The framework not
+only improves many aspects of a mobile experience, because it improves the use
+of these technologies, but has applicability beyond the mobile device arena.
+
+%files
+%defattr(-,root,root,-)
+%doc LICENSE.LGPL LGPL_EXCEPTION.txt
+%{_qt4_importdir}/QtMobility/
+%{_qt4_importdir}/QtMultimediaKit/
+%{_qt4_plugindir}/
+
+
+#--------------------------------------------------------------------
+%package -n %{libname}
+Summary:	Qt Mobility Framework library
+Group:		System/Libraries
+Obsoletes:	%{mklibname QtBearer 1}
+Obsoletes:	%{mklibname QtContacts 1}
+Obsoletes:	%{mklibname QtConnectivity 1}
+Obsoletes:	%{mklibname QtFeedback 1}
+Obsoletes:	%{mklibname QtGallery 1}
+Obsoletes:	%{mklibname QtLocation 1}
+Obsoletes:	%{mklibname QtMultimediaKit 1}
+Obsoletes:	%{mklibname QtOrganizer 1}
+Obsoletes:	%{mklibname QtPublishSubscribe 1}
+Obsoletes:	%{mklibname QtSensors 1}
+Obsoletes:	%{mklibname QtServiceFramework 1}
+Obsoletes:	%{mklibname QtSystemInfo 1}
+Obsoletes:	%{mklibname QtVersit 1}
+Obsoletes:	%{mklibname QtVersitOrganizer 1}
+
+%description -n %{libname}
+Qt Webkit Framnework library files.
+
+%files  -n %{libname}
+%defattr(-,root,root,-)
+%{_qt4_libdir}/libQtBearer.so.%{macro}*
+%{_qt4_libdir}/libQtContacts.so.%{macro}*
+%{_qt4_libdir}/libQtConnectivity.so.%{macro}*
+%{_qt4_libdir}/libQtFeedback.so.%{macro}*
+%{_qt4_libdir}/libQtGallery.so.%{macro}*
+%{_qt4_libdir}/libQtLocation.so.%{macro}*
+%{_qt4_libdir}/libQtMultimediaKit.so.%{macro}*
+%{_qt4_libdir}/libQtOrganizer.so.%{macro}*
+%{_qt4_libdir}/libQtPublishSubscribe.so.%{macro}*
+%{_qt4_libdir}/libQtSensors.so.%{macro}*
+%{_qt4_libdir}/libQtServiceFramework.so.%{macro}*
+%{_qt4_libdir}/libQtSystemInfo.so.%{macro}*
+%{_qt4_libdir}/libQtVersit.so.%{macro}*
+%{_qt4_libdir}/libQtVersitOrganizer.so.%{macro}*
+
+
+#--------------------------------------------------------------------
+%package -n %{libnamedev}
+Summary:	Qt Mobility Framework development files
+Group:		Development/KDE and Qt
+Requires:	%{libname} = %{version}-%{release}
+Requires:	qt4-devel
+Provides:	%{name}-devel = %{version}-%{release}
+Provides:	qt4-mobility-devel = %{version}-%{release}
+
+%description -n %{libnamedev}
+Development files to build applications that use Qt Webkit.
+
+%files -n %{libnamedev}
+%defattr(-,root,root,-)
+%{_qt4_bindir}/icheck
+%{_qt4_bindir}/ndefhandlergen
+%{_qt4_bindir}/qcrmlgen
+%{_qt4_bindir}/servicedbgen
+%{_qt4_bindir}/servicefw
+%{_qt4_bindir}/servicexmlgen
+%{_qt4_bindir}/vsexplorer
+%{_qt4_datadir}/mkspecs/features/mobility.prf
+%{_qt4_datadir}/mkspecs/features/mobilityconfig.prf 
+%{_qt4_includedir}/Qt*/
+%{_qt4_libdir}/libQt*.prl
+%{_qt4_libdir}/libQt*.so
+
+
+#--------------------------------------------------------------------
+%package doc
+Summary:	Qt Mobility API documentation
+Group:		Books/Howtos
+BuildArch:	noarch
+Suggests:	qt4-doc
+Provides:	qt4-mobility-doc = %{version}-%{release}
+
+%description doc
+API documentation files for Qt Mobility.
+
+%files doc
+%defattr(-,root,root,-)
+%{_docdir}/html/qtmobility/
+
+
+%if %{with examples}
+#--------------------------------------------------------------------
+%package examples
+Summary:	Qt Mobility Framework examples
+Group:		System/X11
+Requires:	%{libname} = %{version}-%{release}
+Provides:	qt4-mobility-examples = %{version}-%{release}
+
+%description examples
+Example files for the Qt Mobility Framework.
+
+%files examples
+%defattr(-,root,root,-)
+%{_qt4_bindir}/accel
+%{_qt4_bindir}/annotatedurl
+%{_qt4_bindir}/arrowkeys
+%{_qt4_bindir}/audiodevices
+%{_qt4_bindir}/audioinput
+%{_qt4_bindir}/audiooutput
+%{_qt4_bindir}/audiorecorder
+%{_qt4_bindir}/battery-publisher
+%{_qt4_bindir}/battery-subscriber/
+%{_qt4_bindir}/bearercloud
+%{_qt4_bindir}/bearermonitor
+%{_qt4_bindir}/btchat
+%{_qt4_bindir}/btfiletransfer
+%{_qt4_bindir}/btscanner
+%{_qt4_bindir}/bttennis
+%{_qt4_bindir}/calendardemo
+%{_qt4_bindir}/camera
+%{_qt4_bindir}/cubehouse
+%{_qt4_bindir}/declarative-music-browser
+%{_qt4_bindir}/dialer_service
+%{_qt4_bindir}/documentproperties
+%{_qt4_bindir}/flickrdemo
+%{_qt4_bindir}/hapticsplayer
+%{_qt4_bindir}/hapticsquare
+%{_qt4_bindir}/grueapp
+%{_qt4_bindir}/landmarkbrowser
+%{_qt4_bindir}/logfilepositionsource
+%{_qt4_bindir}/mapsdemo
+%{_qt4_bindir}/mediabrowser
+%{_qt4_bindir}/metadata
+%{_qt4_bindir}/metadata2
+%{_qt4_bindir}/moreplaces.lmx
+%{_qt4_bindir}/mylm.lmx
+%{_qt4_bindir}/ndefeditor
+%{_qt4_bindir}/nmealog.txt
+%{_qt4_bindir}/orientation
+%{_qt4_bindir}/places.gpx
+%{_qt4_bindir}/publish-subscribe
+%{_qt4_bindir}/qml_battery
+%{_qt4_bindir}/qml_battery2
+%{_qt4_bindir}/qml_camera
+%{_qt4_bindir}/qml_device
+%{_qt4_bindir}/qml_landmarkmap
+%{_qt4_bindir}/qml_location_flickr
+%{_qt4_bindir}/qml_mapviewer
+%{_qt4_bindir}/qml_networkinfo
+%{_qt4_bindir}/qml_poster
+%{_qt4_bindir}/qml_scanner
+%{_qt4_bindir}/qml_storageinfo
+%{_qt4_bindir}/qml_tennis
+%{_qt4_bindir}/qmldialer
+%{_qt4_bindir}/qmlnotes
+%{_qt4_bindir}/qmlorganizer
+%{_qt4_bindir}/qsysinfo
+%{_qt4_bindir}/qsystemalignedtimer
+%{_qt4_bindir}/radio
+%{_qt4_bindir}/samplephonebook
+%{_qt4_bindir}/sensor_explorer
+%{_qt4_bindir}/servicebrowser
+%{_qt4_bindir}/sfw-notes
+%{_qt4_bindir}/sfwecho_client
+%{_qt4_bindir}/sfwecho_service
+%{_qt4_bindir}/show_acceleration
+%{_qt4_bindir}/show_als
+%{_qt4_bindir}/show_compass
+%{_qt4_bindir}/show_gyroscope
+%{_qt4_bindir}/show_light
+%{_qt4_bindir}/show_magneticflux
+%{_qt4_bindir}/show_orientation
+%{_qt4_bindir}/show_proximity
+%{_qt4_bindir}/show_reflectance
+%{_qt4_bindir}/show_rotation
+%{_qt4_bindir}/show_tap
+%{_qt4_bindir}/simplelog.txt
+%{_qt4_bindir}/slideshow
+%{_qt4_bindir}/todo
+%{_qt4_bindir}/videographicsitem
+%{_qt4_bindir}/videowidget
+%{_qt4_bindir}/xmldata/*.xml
+%{_qt4_plugindir}/serviceframework/libserviceframework_bluetoothtransferplugin.so
+%{_qt4_plugindir}/serviceframework/libserviceframework_filemanagerplugin.so
+%{_qt4_plugindir}/serviceframework/libserviceframework_landlinedialerservice.so
+%{_qt4_plugindir}/serviceframework/libserviceframework_notesmanagerplugin.so
+%{_qt4_plugindir}/serviceframework/libserviceframework_voipdialerservice.so
+%{_qt4_plugindir}/sensors/libqtsensors_grueplugin.so
+%endif
+
+
+%if %{with demos}
+#--------------------------------------------------------------------
+%package demos
+Summary:	Qt Mobility Framework demos
+Group:		System/X11
+Requires:	%{libname} = %{version}-%{release}
+Provides:	qt4-mobility-demos = %{version}-%{release}
+
+%description demos
+Example files for the Qt Mobility Framework.
+
+%files demos
+%defattr(-,root,root,-)
+%{_qt4_bindir}/lightmaps_with_location
+%{_qt4_bindir}/player
+%{_qt4_bindir}/qmlcontacts
+%{_qt4_bindir}/smallsensors
+%{_qt4_bindir}/weatherinfo_with_location
+%endif
+
+
+#--------------------------------------------------------------------
+%prep
+%setup -qn %{name}-opensource-src-%{version}
+%patch1 -p1 -b .pulseaudio_lib
+%patch2 -p0 -b .no_rpath
+
+%build
+PATH="%{_qt4_bindir}:$PATH" ; export PATH
+
+./configure \
+    -prefix %{_qt4_datadir} \
+    -libdir %{_qt4_libdir} \
+    -plugindir %{_qt4_plugindir} \
+    %{?with_examples:-examples} \
+    %{?with_demos:-demos}
+
+%make
+
+%install
+rm -rf %{buildroot}
+%makeinstall INSTALL_ROOT=%{buildroot} 
+
+# install docs
+install -d -m 755 %{buildroot}%{_docdir}/html/qtmobility/
+cp -a doc/html/* %{buildroot}%{_docdir}/html/qtmobility/
+
+
