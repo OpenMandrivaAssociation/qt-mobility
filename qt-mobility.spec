@@ -44,7 +44,6 @@ BuildRequires:	gdb
 # WARNING: still isnt possible to build against qmf
 BuildConflicts:	qmf-devel
 Provides:	qt4-mobility = %{version}-%{release}
-Requires:	%{libname} = %{version}-%{release}
 
 %description
 Qt Mobility Project delivers a set of new APIs to Qt with features that are well
