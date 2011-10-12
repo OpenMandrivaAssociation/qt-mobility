@@ -6,6 +6,20 @@
 %define major 1
 
 %define libnamedev %mklibname %{name} -d
+%define libqtbearer %mklibname qtbearer %major
+%define libqtcontacts %mklibname qtcontacts %major
+%define libqtconnectivity %mklibname qtconnectivity %major
+%define libqtfeedback %mklibname qtfeedback %major
+%define libqtgallery %mklibname qtgallery %major
+%define libqtlocation %mklibname qtlocation %major
+%define libqtmultimediakit %mklibname qtmultimediakit %major
+%define libqtorganizer %mklibname qtorganizer %major
+%define libqtpublishsubscribe %mklibname qtpublishsubscribe %major
+%define libqtsensors %mklibname qtsensors %major
+%define libqtserviceframework %mklibname qtserviceframework %major
+%define libqtsysteminfo %mklibname qtsysteminfo %major
+%define libqtversit %mklibname qtversit %major
+%define libqtversitorganizer %mklibname qtversitorganizer %major
 
 %define _qt4_datadir		%{_prefix}/lib/qt4
 %define _qt4_bindir		%{_qt4_datadir}/bin
