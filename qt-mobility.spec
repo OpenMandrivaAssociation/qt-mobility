@@ -3,8 +3,9 @@
 # Build demos
 %bcond_without demos
 
+%define major 1
 %define macro 1
-%define libname %mklibname %{name} %{macro}
+
 %define libnamedev %mklibname %{name} -d
 
 %define _qt4_datadir		%{_prefix}/lib/qt4
@@ -20,13 +21,13 @@
 
 
 Name:		qt-mobility
-Summary:		Qt Mobility Framework
+Summary:	Qt Mobility Framework
 Group:		Development/Other
-Version:		1.2.0
-Release:		1
-License:		LGPLv2 with exceptions
+Version:	1.2.0
+Release:	1
+License:	LGPLv2 with exceptions
 URL:		http://qt.nokia.com/products/qt-addons/mobility 
-Source0:		http://get.qt.nokia.com/qt/add-ons/%{name}-opensource-src-%{version}.tar.gz
+Source0:	http://get.qt.nokia.com/qt/add-ons/%{name}-opensource-src-%{version}.tar.gz
 Patch1:		qt-mobility-opensource-src-1.1.0-pulseaudio-lib.patch
 Patch2:		qt-mobility-1.2.0-no-rpath.patch
 
@@ -55,7 +56,6 @@ only improves many aspects of a mobile experience, because it improves the use
 of these technologies, but has applicability beyond the mobile device arena.
 
 %files
-%defattr(-,root,root,-)
 %doc LICENSE.LGPL LGPL_EXCEPTION.txt
 %{_qt4_importdir}/QtMobility/
 %{_qt4_importdir}/QtMultimediaKit/
@@ -63,53 +63,181 @@ of these technologies, but has applicability beyond the mobile device arena.
 
 
 #--------------------------------------------------------------------
-%package -n %{libname}
+%package -n %{libqtbearer}
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
-Obsoletes:	%{mklibname QtBearer 1}
-Obsoletes:	%{mklibname QtContacts 1}
-Obsoletes:	%{mklibname QtConnectivity 1}
-Obsoletes:	%{mklibname QtFeedback 1}
-Obsoletes:	%{mklibname QtGallery 1}
-Obsoletes:	%{mklibname QtLocation 1}
-Obsoletes:	%{mklibname QtMultimediaKit 1}
-Obsoletes:	%{mklibname QtOrganizer 1}
-Obsoletes:	%{mklibname QtPublishSubscribe 1}
-Obsoletes:	%{mklibname QtSensors 1}
-Obsoletes:	%{mklibname QtServiceFramework 1}
-Obsoletes:	%{mklibname QtSystemInfo 1}
-Obsoletes:	%{mklibname QtVersit 1}
-Obsoletes:	%{mklibname QtVersitOrganizer 1}
 
-%description -n %{libname}
-Qt Webkit Framnework library files.
+%description -n %{libqtbearer}
+Qt Mobility Framework library.
 
-%files  -n %{libname}
-%defattr(-,root,root,-)
-%{_qt4_libdir}/libQtBearer.so.%{macro}*
-%{_qt4_libdir}/libQtContacts.so.%{macro}*
-%{_qt4_libdir}/libQtConnectivity.so.%{macro}*
-%{_qt4_libdir}/libQtFeedback.so.%{macro}*
-%{_qt4_libdir}/libQtGallery.so.%{macro}*
-%{_qt4_libdir}/libQtLocation.so.%{macro}*
-%{_qt4_libdir}/libQtMultimediaKit.so.%{macro}*
-%{_qt4_libdir}/libQtOrganizer.so.%{macro}*
-%{_qt4_libdir}/libQtPublishSubscribe.so.%{macro}*
-%{_qt4_libdir}/libQtSensors.so.%{macro}*
-%{_qt4_libdir}/libQtServiceFramework.so.%{macro}*
-%{_qt4_libdir}/libQtSystemInfo.so.%{macro}*
-%{_qt4_libdir}/libQtVersit.so.%{macro}*
-%{_qt4_libdir}/libQtVersitOrganizer.so.%{macro}*
+%files -n %{libqtbearer}
+%{_qt4_libdir}/libQtBearer.so.%{major}*
 
+#--------------------------------------------------------------------
+%package -n %{libqtcontacts}
+Summary:	Qt Mobility Framework library
+Group:		System/Libraries
+
+%description -n %{libqtcontacts}
+Qt Mobility Framework library.
+
+%files -n %{libqtcontacts}
+%{_qt4_libdir}/libQtContacts.so.%{major}*
+
+#--------------------------------------------------------------------
+%package -n %{libqtconnectivity}
+Summary:	Qt Mobility Framework library
+Group:		System/Libraries
+
+%description -n %{libqtconnectivity}
+Qt Mobility Framework library.
+
+%files -n %{libqtconnectivity}
+%{_qt4_libdir}/libQtConnectivity.so.%{major}*
+
+#--------------------------------------------------------------------
+%package -n %{libqtfeedback}
+Summary:	Qt Mobility Framework library
+Group:		System/Libraries
+
+%description -n %{libqtfeedback}
+Qt Mobility Framework library.
+
+%files -n %{libqtfeedback}
+%{_qt4_libdir}/libQtFeedback.so.%{major}*
+
+#--------------------------------------------------------------------
+%package -n %{libqtgallery}
+Summary:	Qt Mobility Framework library
+Group:		System/Libraries
+
+%description -n %{libqtgallery}
+Qt Mobility Framework library.
+
+%files -n %{libqtgallery}
+%{_qt4_libdir}/libQtGallery.so.%{major}*
+
+#--------------------------------------------------------------------
+%package -n %{libqtlocation}
+Summary:	Qt Mobility Framework library
+Group:		System/Libraries
+
+%description -n %{libqtlocation}
+Qt Mobility Framework library.
+
+%files -n %{libqtlocation}
+%{_qt4_libdir}/libQtLocation.so.%{major}*
+
+#--------------------------------------------------------------------
+%package -n %{libqtmultimediakit}
+Summary:	Qt Mobility Framework library
+Group:		System/Libraries
+
+%description -n %{libqtmultimediakit}
+Qt Mobility Framework library.
+
+%files -n %{libqtmultimediakit}
+%{_qt4_libdir}/libQtMultimediaKit.so.%{major}*
+
+#--------------------------------------------------------------------
+%package -n %{libqtorganizer}
+Summary:	Qt Mobility Framework library
+Group:		System/Libraries
+
+%description -n %{libqtorganizer}
+Qt Mobility Framework library.
+
+%files -n %{libqtorganizer}
+%{_qt4_libdir}/libQtOrganizer.so.%{major}*
+
+#--------------------------------------------------------------------
+%package -n %{libqtpublishsubscribe}
+Summary:	Qt Mobility Framework library
+Group:		System/Libraries
+
+%description -n %{libqtpublishsubscribe}
+Qt Mobility Framework library.
+
+%files -n %{libqtpublishsubscribe}
+%{_qt4_libdir}/libQtPublishSubscribe.so.%{major}*
+
+#--------------------------------------------------------------------
+%package -n %{libqtsensors}
+Summary:	Qt Mobility Framework library
+Group:		System/Libraries
+
+%description -n %{libqtsensors}
+Qt Mobility Framework library.
+
+%files -n %{libqtsensors}
+%{_qt4_libdir}/libQtSensors.so.%{major}*
+
+#--------------------------------------------------------------------
+%package -n %{libqtserviceframework}
+Summary:	Qt Mobility Framework library
+Group:		System/Libraries
+
+%description -n %{libqtserviceframework}
+Qt Mobility Framework library.
+
+%files -n %{libqtserviceframework}
+%{_qt4_libdir}/libQtServiceFramework.so.%{major}*
+
+#--------------------------------------------------------------------
+%package -n %{libqtsysteminfo}
+Summary:	Qt Mobility Framework library
+Group:		System/Libraries
+
+%description -n %{libqtsysteminfo}
+Qt Mobility Framework library.
+
+%files -n %{libqtsysteminfo}
+%{_qt4_libdir}/libQtSystemInfo.so.%{major}*
+
+#--------------------------------------------------------------------
+%package -n %{libqtversit}
+Summary:	Qt Mobility Framework library
+Group:		System/Libraries
+
+%description -n %{libqtversit}
+Qt Mobility Framework library.
+
+%files -n %{libqtversit}
+%{_qt4_libdir}/libQtVersit.so.%{major}*
+
+#--------------------------------------------------------------------
+%package -n %{libqtversitorganizer}
+Summary:	Qt Mobility Framework library
+Group:		System/Libraries
+
+%description -n %{libqtversitorganizer}
+Qt Mobility Framework library.
+
+%files -n %{libqtversitorganizer}
+%{_qt4_libdir}/libQtVersitOrganizer.so.%{major}*
 
 #--------------------------------------------------------------------
 %package -n %{libnamedev}
 Summary:	Qt Mobility Framework development files
 Group:		Development/KDE and Qt
-Requires:	%{libname} = %{version}-%{release}
 Requires:	qt4-devel
 Provides:	%{name}-devel = %{version}-%{release}
 Provides:	qt4-mobility-devel = %{version}-%{release}
+
+Requires:  	%libqtbearer = %{version}-%{release}
+Requires:       %libqtcontacts = %{version}-%{release}
+Requires:       %libqtconnectivity = %{version}-%{release}
+Requires:       %libqtfeedback = %{version}-%{release}
+Requires:       %libqtgallery = %{version}-%{release}
+Requires:       %libqtlocation = %{version}-%{release}
+Requires:       %libqtmultimediakit = %{version}-%{release}
+Requires:       %libqtorganizer = %{version}-%{release}
+Requires:       %libqtpublishsubscribe = %{version}-%{release}
+Requires:       %libqtsensors = %{version}-%{release}
+Requires:       %libqtserviceframework = %{version}-%{release}
+Requires:       %libqtsysteminfo = %{version}-%{release}
+Requires:       %libqtversit = %{version}-%{release}
+Requires:       %libqtversitorganizer = %{version}-%{release}
 
 %description -n %{libnamedev}
 Development files to build applications that use Qt Webkit.
