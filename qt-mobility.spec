@@ -3,6 +3,8 @@
 # Build demos
 %bcond_without demos
 
+%bcond_with docs
+
 %define major 1
 
 %define snap 20110922
@@ -293,7 +295,7 @@ Development files to build applications that use Qt Webkit.
 %{_qt4_libdir}/libQt*.so
 
 #--------------------------------------------------------------------
-
+%if %with_docs
 %package doc
 Summary:	Qt Mobility API documentation
 Group:		Books/Howtos
@@ -307,6 +309,7 @@ API documentation files for Qt Mobility.
 %files doc
 %defattr(-,root,root,-)
 %{_docdir}/html/qtmobility/
+%endif
 
 #--------------------------------------------------------------------
 
@@ -451,10 +454,11 @@ PATH="%{_qt4_bindir}:$PATH" ; export PATH
 %install
 %makeinstall INSTALL_ROOT=%{buildroot} 
 
+%if %with_docs
 # install docs
 install -d -m 755 %{buildroot}%{_docdir}/html/qtmobility/
 cp -a doc/html/* %{buildroot}%{_docdir}/html/qtmobility/
-
+%endif
 # die rpath, die
 chrpath --delete %{buildroot}%{_bindir}/* ||:
 chrpath --delete %{buildroot}%{_qt4_libdir}/libQt*.so ||:
