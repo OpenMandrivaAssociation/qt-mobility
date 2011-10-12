@@ -413,7 +413,6 @@ PATH="%{_qt4_bindir}:$PATH" ; export PATH
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall INSTALL_ROOT=%{buildroot} 
 
 # install docs
