@@ -18,7 +18,6 @@
 %define _qt4_importdir		%{_qt4_datadir}/imports
 %define _qt4_translationdir	%{_qt4_datadir}/translations
 
-
 Name:		qt-mobility
 Summary:	Qt Mobility Framework
 Group:		Development/Other
@@ -29,7 +28,6 @@ URL:		http://qt.nokia.com/products/qt-addons/mobility
 Source0:	http://get.qt.nokia.com/qt/add-ons/%{name}-opensource-src-%{version}.tar.gz
 Patch1:		qt-mobility-opensource-src-1.1.0-pulseaudio-lib.patch
 Patch2:		qt-mobility-1.2.0-no-rpath.patch
-
 BuildRequires:	alsa-lib-devel
 BuildRequires:	bluez-devel
 BuildRequires:	libblkid-devel
@@ -59,9 +57,10 @@ of these technologies, but has applicability beyond the mobile device arena.
 %{_qt4_importdir}/QtMultimediaKit/
 %{_qt4_plugindir}/*
 
-
 #--------------------------------------------------------------------
+
 %package -n %{libqtbearer}
+
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
 
@@ -72,7 +71,9 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtBearer.so.%{major}*
 
 #--------------------------------------------------------------------
+
 %package -n %{libqtcontacts}
+
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
 
@@ -83,6 +84,7 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtContacts.so.%{major}*
 
 #--------------------------------------------------------------------
+
 %package -n %{libqtconnectivity}
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
@@ -94,6 +96,7 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtConnectivity.so.%{major}*
 
 #--------------------------------------------------------------------
+
 %package -n %{libqtfeedback}
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
@@ -105,6 +108,7 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtFeedback.so.%{major}*
 
 #--------------------------------------------------------------------
+
 %package -n %{libqtgallery}
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
@@ -116,6 +120,7 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtGallery.so.%{major}*
 
 #--------------------------------------------------------------------
+
 %package -n %{libqtlocation}
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
@@ -127,6 +132,7 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtLocation.so.%{major}*
 
 #--------------------------------------------------------------------
+
 %package -n %{libqtmultimediakit}
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
@@ -138,6 +144,7 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtMultimediaKit.so.%{major}*
 
 #--------------------------------------------------------------------
+
 %package -n %{libqtorganizer}
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
@@ -149,6 +156,7 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtOrganizer.so.%{major}*
 
 #--------------------------------------------------------------------
+
 %package -n %{libqtpublishsubscribe}
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
@@ -160,6 +168,7 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtPublishSubscribe.so.%{major}*
 
 #--------------------------------------------------------------------
+
 %package -n %{libqtsensors}
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
@@ -171,6 +180,7 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtSensors.so.%{major}*
 
 #--------------------------------------------------------------------
+
 %package -n %{libqtserviceframework}
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
@@ -182,6 +192,7 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtServiceFramework.so.%{major}*
 
 #--------------------------------------------------------------------
+
 %package -n %{libqtsysteminfo}
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
@@ -193,6 +204,7 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtSystemInfo.so.%{major}*
 
 #--------------------------------------------------------------------
+
 %package -n %{libqtversit}
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
@@ -204,6 +216,7 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtVersit.so.%{major}*
 
 #--------------------------------------------------------------------
+
 %package -n %{libqtversitorganizer}
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
@@ -215,6 +228,7 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtVersitOrganizer.so.%{major}*
 
 #--------------------------------------------------------------------
+
 %package -n %{libnamedev}
 Summary:	Qt Mobility Framework development files
 Group:		Development/KDE and Qt
@@ -255,8 +269,8 @@ Development files to build applications that use Qt Webkit.
 %{_qt4_libdir}/libQt*.prl
 %{_qt4_libdir}/libQt*.so
 
-
 #--------------------------------------------------------------------
+
 %package doc
 Summary:	Qt Mobility API documentation
 Group:		Books/Howtos
@@ -271,9 +285,9 @@ API documentation files for Qt Mobility.
 %defattr(-,root,root,-)
 %{_docdir}/html/qtmobility/
 
+#--------------------------------------------------------------------
 
 %if %{with examples}
-#--------------------------------------------------------------------
 %package examples
 Summary:	Qt Mobility Framework examples
 Group:		System/X11
@@ -372,9 +386,10 @@ Example files for the Qt Mobility Framework.
 %{_qt4_plugindir}/sensors/libqtsensors_grueplugin.so
 %endif
 
-
 %if %{with demos}
+
 #--------------------------------------------------------------------
+
 %package demos
 Summary:	Qt Mobility Framework demos
 Group:		System/X11
@@ -393,8 +408,8 @@ Example files for the Qt Mobility Framework.
 %{_qt4_bindir}/weatherinfo_with_location
 %endif
 
-
 #--------------------------------------------------------------------
+
 %prep
 %setup -qn %{name}-opensource-src-%{version}
 %patch1 -p1 -b .pulseaudio_lib
@@ -418,5 +433,4 @@ PATH="%{_qt4_bindir}:$PATH" ; export PATH
 # install docs
 install -d -m 755 %{buildroot}%{_docdir}/html/qtmobility/
 cp -a doc/html/* %{buildroot}%{_docdir}/html/qtmobility/
-
 
