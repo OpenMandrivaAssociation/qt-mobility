@@ -4,7 +4,6 @@
 %bcond_without demos
 
 %define major 1
-%define macro 1
 
 %define libnamedev %mklibname %{name} -d
 
