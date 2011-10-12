@@ -305,7 +305,6 @@ API documentation files for Qt Mobility.
 %package examples
 Summary:	Qt Mobility Framework examples
 Group:		System/X11
-Requires:	%{libname} = %{version}-%{release}
 Provides:	qt4-mobility-examples = %{version}-%{release}
 
 %description examples
@@ -407,7 +406,6 @@ Example files for the Qt Mobility Framework.
 %package demos
 Summary:	Qt Mobility Framework demos
 Group:		System/X11
-Requires:	%{libname} = %{version}-%{release}
 Provides:	qt4-mobility-demos = %{version}-%{release}
 
 %description demos
