@@ -5,6 +5,8 @@
 
 %define major 1
 
+%define snap 20110922
+
 %define libnamedev %mklibname %{name} -d
 %define libqtbearer %mklibname qtbearer %major
 %define libqtcontacts %mklibname qtcontacts %major
@@ -39,9 +41,15 @@ Version:	1.2.0
 Release:	1
 License:	LGPLv2 with exceptions
 URL:		http://qt.nokia.com/products/qt-addons/mobility 
-Source0:	http://get.qt.nokia.com/qt/add-ons/%{name}-opensource-src-%{version}.tar.gz
-Patch1:		qt-mobility-opensource-src-1.1.0-pulseaudio-lib.patch
-Patch2:		qt-mobility-1.2.0-no-rpath.patch
+%if 0%{?snap:1}
+# git clone git://gitorious.org/qt-mobility/qt-mobility.git
+# cd qt-mobility; git archive --prefix=qt-mobility-opensource-src-1.2.0/ master | xz -9 >  qt-mobility-opensources-src-1.2.0-20110922.tar.xz
+Source0: qt-mobility-opensource-src-1.2.0-%{snap}.tar.xz
+%else
+Source0: http://get.qt.nokia.com/qt/add-ons/qt-mobility-opensource-src-%{version}.tar.gz
+%endif
+## upstreamable patches
+Patch50: qt-mobility-opensource-src-1.2.0-translationsdir.patch
 BuildRequires:	alsa-lib-devel
 BuildRequires:	bluez-devel
 BuildRequires:	libblkid-devel
@@ -425,7 +433,7 @@ Example files for the Qt Mobility Framework.
 %prep
 %setup -qn %{name}-opensource-src-%{version}
 %patch1 -p1 -b .pulseaudio_lib
-%patch2 -p0 -b .no_rpath
+%patch50 -p1 -b .translationsdir
 
 %build
 PATH="%{_qt4_bindir}:$PATH" ; export PATH
@@ -445,4 +453,11 @@ PATH="%{_qt4_bindir}:$PATH" ; export PATH
 # install docs
 install -d -m 755 %{buildroot}%{_docdir}/html/qtmobility/
 cp -a doc/html/* %{buildroot}%{_docdir}/html/qtmobility/
+
+# die rpath, die
+chrpath --delete %{buildroot}%{_bindir}/* ||:
+chrpath --delete %{buildroot}%{_qt4_libdir}/libQt*.so ||:
+chrpath --delete %{buildroot}%{_qt4_plugindir}/*/*.so ||:
+chrpath --delete %{buildroot}%{_qt4_importdir}/*/*.so ||:
+chrpath --delete %{buildroot}%{_qt4_importdir}/*/*/*.so ||:
 
