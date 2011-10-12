@@ -3,7 +3,7 @@
 # Build demos
 %bcond_without demos
 
-%bcond_with docs
+%define with_docs 0
 
 %define major 1
 
