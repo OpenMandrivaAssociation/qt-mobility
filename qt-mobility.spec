@@ -40,7 +40,7 @@ Name:		qt-mobility
 Summary:	Qt Mobility Framework
 Group:		Development/Other
 Version:	1.2.0
-Release:	1
+Release:	2
 License:	LGPLv2 with exceptions
 URL:		http://qt.nokia.com/products/qt-addons/mobility 
 %if 0%{?snap:1}
@@ -64,6 +64,7 @@ BuildRequires:	pulseaudio-devel
 BuildRequires:	udev-devel
 BuildRequires:	qt4-devel
 BuildRequires:	gdb
+BuildRequires: chrpath
 # WARNING: still isnt possible to build against qmf
 BuildConflicts:	qmf-devel
 Provides:	qt4-mobility = %{version}-%{release}
