@@ -58,7 +58,7 @@ of these technologies, but has applicability beyond the mobile device arena.
 %doc LICENSE.LGPL LGPL_EXCEPTION.txt
 %{_qt4_importdir}/QtMobility/
 %{_qt4_importdir}/QtMultimediaKit/
-%{_qt4_plugindir}/
+%{_qt4_plugindir}/*
 
 
 #--------------------------------------------------------------------
