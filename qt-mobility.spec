@@ -48,6 +48,7 @@ Source0: qt-mobility-opensource-src-1.2.0-%{snap}.tar.xz
 %else
 Source0: http://get.qt.nokia.com/qt/add-ons/qt-mobility-opensource-src-%{version}.tar.gz
 %endif
+Patch1:                qt-mobility-opensource-src-1.1.0-pulseaudio-lib.patch
 ## upstreamable patches
 Patch50: qt-mobility-opensource-src-1.2.0-translationsdir.patch
 BuildRequires:	alsa-lib-devel
