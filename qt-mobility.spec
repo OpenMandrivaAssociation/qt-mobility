@@ -1,9 +1,9 @@
+# Build docs
+%bcond_without docs
 # Build examples
 %bcond_without examples
 # Build demos
 %bcond_without demos
-
-%define with_docs 0
 
 %define major 1
 
@@ -40,17 +40,12 @@ Name:		qt-mobility
 Summary:	Qt Mobility Framework
 Group:		Development/Other
 Version:	1.2.0
-Release:	2
+Release:	3
 License:	LGPLv2 with exceptions
 URL:		http://qt.nokia.com/products/qt-addons/mobility 
-%if 0%{?snap:1}
-# git clone git://gitorious.org/qt-mobility/qt-mobility.git
-# cd qt-mobility; git archive --prefix=qt-mobility-opensource-src-1.2.0/ master | xz -9 >  qt-mobility-opensources-src-1.2.0-20110922.tar.xz
-Source0: qt-mobility-opensource-src-1.2.0-%{snap}.tar.xz
-%else
-Source0: http://get.qt.nokia.com/qt/add-ons/qt-mobility-opensource-src-%{version}.tar.gz
-%endif
-Patch1:                qt-mobility-opensource-src-1.1.0-pulseaudio-lib.patch
+Source0:		http://get.qt.nokia.com/qt/add-ons/%{name}-opensource-src-%{version}.tar.gz
+Patch1:		qt-mobility-opensource-src-1.1.0-pulseaudio-lib.patch
+Patch2:		qt-mobility-1.2.0-no-rpath.patch
 ## upstreamable patches
 Patch50: qt-mobility-opensource-src-1.2.0-translationsdir.patch
 BuildRequires:	alsa-lib-devel
@@ -64,9 +59,6 @@ BuildRequires:	pulseaudio-devel
 BuildRequires:	udev-devel
 BuildRequires:	qt4-devel
 BuildRequires:	gdb
-BuildRequires: chrpath
-# WARNING: still isnt possible to build against qmf
-BuildConflicts:	qmf-devel
 Provides:	qt4-mobility = %{version}-%{release}
 
 %description
@@ -84,9 +76,7 @@ of these technologies, but has applicability beyond the mobile device arena.
 %{_qt4_plugindir}/*
 
 #--------------------------------------------------------------------
-
 %package -n %{libqtbearer}
-
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
 
@@ -97,9 +87,7 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtBearer.so.%{major}*
 
 #--------------------------------------------------------------------
-
 %package -n %{libqtcontacts}
-
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
 
@@ -110,11 +98,9 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtContacts.so.%{major}*
 
 #--------------------------------------------------------------------
-
 %package -n %{libqtconnectivity}
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
-
 %description -n %{libqtconnectivity}
 Qt Mobility Framework library.
 
@@ -122,7 +108,6 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtConnectivity.so.%{major}*
 
 #--------------------------------------------------------------------
-
 %package -n %{libqtfeedback}
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
@@ -134,7 +119,6 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtFeedback.so.%{major}*
 
 #--------------------------------------------------------------------
-
 %package -n %{libqtgallery}
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
@@ -146,7 +130,6 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtGallery.so.%{major}*
 
 #--------------------------------------------------------------------
-
 %package -n %{libqtlocation}
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
@@ -158,7 +141,6 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtLocation.so.%{major}*
 
 #--------------------------------------------------------------------
-
 %package -n %{libqtmultimediakit}
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
@@ -170,7 +152,6 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtMultimediaKit.so.%{major}*
 
 #--------------------------------------------------------------------
-
 %package -n %{libqtorganizer}
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
@@ -182,7 +163,6 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtOrganizer.so.%{major}*
 
 #--------------------------------------------------------------------
-
 %package -n %{libqtpublishsubscribe}
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
@@ -194,7 +174,6 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtPublishSubscribe.so.%{major}*
 
 #--------------------------------------------------------------------
-
 %package -n %{libqtsensors}
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
@@ -206,7 +185,6 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtSensors.so.%{major}*
 
 #--------------------------------------------------------------------
-
 %package -n %{libqtserviceframework}
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
@@ -218,7 +196,6 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtServiceFramework.so.%{major}*
 
 #--------------------------------------------------------------------
-
 %package -n %{libqtsysteminfo}
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
@@ -230,7 +207,6 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtSystemInfo.so.%{major}*
 
 #--------------------------------------------------------------------
-
 %package -n %{libqtversit}
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
@@ -242,7 +218,6 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtVersit.so.%{major}*
 
 #--------------------------------------------------------------------
-
 %package -n %{libqtversitorganizer}
 Summary:	Qt Mobility Framework library
 Group:		System/Libraries
@@ -254,15 +229,13 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtVersitOrganizer.so.%{major}*
 
 #--------------------------------------------------------------------
-
 %package -n %{libnamedev}
 Summary:	Qt Mobility Framework development files
 Group:		Development/KDE and Qt
 Requires:	qt4-devel
 Provides:	%{name}-devel = %{version}-%{release}
 Provides:	qt4-mobility-devel = %{version}-%{release}
-
-Requires:  	%libqtbearer = %{version}-%{release}
+Requires:       %libqtbearer = %{version}-%{release}
 Requires:       %libqtcontacts = %{version}-%{release}
 Requires:       %libqtconnectivity = %{version}-%{release}
 Requires:       %libqtfeedback = %{version}-%{release}
@@ -281,7 +254,6 @@ Requires:       %libqtversitorganizer = %{version}-%{release}
 Development files to build applications that use Qt Webkit.
 
 %files -n %{libnamedev}
-%defattr(-,root,root,-)
 %{_qt4_bindir}/icheck
 %{_qt4_bindir}/ndefhandlergen
 %{_qt4_bindir}/qcrmlgen
@@ -296,7 +268,7 @@ Development files to build applications that use Qt Webkit.
 %{_qt4_libdir}/libQt*.so
 
 #--------------------------------------------------------------------
-%if %with_docs
+%if %{with docs}
 %package doc
 Summary:	Qt Mobility API documentation
 Group:		Books/Howtos
@@ -308,12 +280,10 @@ Provides:	qt4-mobility-doc = %{version}-%{release}
 API documentation files for Qt Mobility.
 
 %files doc
-%defattr(-,root,root,-)
 %{_docdir}/html/qtmobility/
 %endif
 
 #--------------------------------------------------------------------
-
 %if %{with examples}
 %package examples
 Summary:	Qt Mobility Framework examples
@@ -324,7 +294,6 @@ Provides:	qt4-mobility-examples = %{version}-%{release}
 Example files for the Qt Mobility Framework.
 
 %files examples
-%defattr(-,root,root,-)
 %{_qt4_bindir}/accel
 %{_qt4_bindir}/annotatedurl
 %{_qt4_bindir}/arrowkeys
@@ -413,9 +382,7 @@ Example files for the Qt Mobility Framework.
 %endif
 
 %if %{with demos}
-
 #--------------------------------------------------------------------
-
 %package demos
 Summary:	Qt Mobility Framework demos
 Group:		System/X11
@@ -425,7 +392,6 @@ Provides:	qt4-mobility-demos = %{version}-%{release}
 Example files for the Qt Mobility Framework.
 
 %files demos
-%defattr(-,root,root,-)
 %{_qt4_bindir}/lightmaps_with_location
 %{_qt4_bindir}/player
 %{_qt4_bindir}/qmlcontacts
@@ -434,14 +400,14 @@ Example files for the Qt Mobility Framework.
 %endif
 
 #--------------------------------------------------------------------
-
 %prep
 %setup -qn %{name}-opensource-src-%{version}
 %patch1 -p1 -b .pulseaudio_lib
+%patch2 -p0 -b .no_rpath
 %patch50 -p1 -b .translationsdir
 
 %build
-PATH="%{_qt4_bindir}:$PATH" ; export PATH
+PATH="%{_qt4_bindir}:$PATH"; export PATH
 
 ./configure \
     -prefix %{_qt4_datadir} \
@@ -455,15 +421,10 @@ PATH="%{_qt4_bindir}:$PATH" ; export PATH
 %install
 %makeinstall INSTALL_ROOT=%{buildroot} 
 
-%if %with_docs
+%if %{whit docs}
 # install docs
 install -d -m 755 %{buildroot}%{_docdir}/html/qtmobility/
 cp -a doc/html/* %{buildroot}%{_docdir}/html/qtmobility/
 %endif
-# die rpath, die
-chrpath --delete %{buildroot}%{_bindir}/* ||:
-chrpath --delete %{buildroot}%{_qt4_libdir}/libQt*.so ||:
-chrpath --delete %{buildroot}%{_qt4_plugindir}/*/*.so ||:
-chrpath --delete %{buildroot}%{_qt4_importdir}/*/*.so ||:
-chrpath --delete %{buildroot}%{_qt4_importdir}/*/*/*.so ||:
+
 
