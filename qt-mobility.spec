@@ -46,8 +46,9 @@ URL:		http://qt.nokia.com/products/qt-addons/mobility
 Source0:		http://get.qt.nokia.com/qt/add-ons/%{name}-opensource-src-%{version}.tar.gz
 Patch1:		qt-mobility-opensource-src-1.1.0-pulseaudio-lib.patch
 Patch2:		qt-mobility-1.2.0-no-rpath.patch
+Patch3:		qt-mobility-1.2.0-fix-qmetaobjectbuilder.patch
 ## upstreamable patches
-Patch50: qt-mobility-opensource-src-1.2.0-translationsdir.patch
+Patch50:		qt-mobility-opensource-src-1.2.0-translationsdir.patch
 BuildRequires:	alsa-lib-devel
 BuildRequires:	bluez-devel
 BuildRequires:	libblkid-devel
@@ -404,6 +405,7 @@ Example files for the Qt Mobility Framework.
 %setup -qn %{name}-opensource-src-%{version}
 %patch1 -p1 -b .pulseaudio_lib
 %patch2 -p0 -b .no_rpath
+%patch3 -p0 -b .fix_qmetaobjectbuilder
 %patch50 -p1 -b .translationsdir
 
 %build
@@ -426,5 +428,3 @@ PATH="%{_qt4_bindir}:$PATH"; export PATH
 install -d -m 755 %{buildroot}%{_docdir}/html/qtmobility/
 cp -a doc/html/* %{buildroot}%{_docdir}/html/qtmobility/
 %endif
-
-
