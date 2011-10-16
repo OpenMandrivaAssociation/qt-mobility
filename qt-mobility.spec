@@ -75,6 +75,14 @@ of these technologies, but has applicability beyond the mobile device arena.
 %{_qt4_importdir}/QtMobility/
 %{_qt4_importdir}/QtMultimediaKit/
 %{_qt4_plugindir}/*
+%if %{with examples}
+%exclude %{_qt4_plugindir}/serviceframework/libserviceframework_bluetoothtransferplugin.so
+%exclude %{_qt4_plugindir}/serviceframework/libserviceframework_filemanagerplugin.so
+%exclude %{_qt4_plugindir}/serviceframework/libserviceframework_landlinedialerservice.so
+%exclude %{_qt4_plugindir}/serviceframework/libserviceframework_notesmanagerplugin.so
+%exclude %{_qt4_plugindir}/serviceframework/libserviceframework_voipdialerservice.so
+%exclude %{_qt4_plugindir}/sensors/libqtsensors_grueplugin.so
+%endif
 
 #--------------------------------------------------------------------
 %package -n %{libqtbearer}
@@ -233,23 +241,23 @@ Qt Mobility Framework library.
 %package -n %{libnamedev}
 Summary:	Qt Mobility Framework development files
 Group:		Development/KDE and Qt
-Requires:	qt4-devel
 Provides:	%{name}-devel = %{version}-%{release}
+Provides:	lib%{name}-devel = %{version}-%{release}
 Provides:	qt4-mobility-devel = %{version}-%{release}
-Requires:       %libqtbearer = %{version}-%{release}
-Requires:       %libqtcontacts = %{version}-%{release}
-Requires:       %libqtconnectivity = %{version}-%{release}
-Requires:       %libqtfeedback = %{version}-%{release}
-Requires:       %libqtgallery = %{version}-%{release}
-Requires:       %libqtlocation = %{version}-%{release}
-Requires:       %libqtmultimediakit = %{version}-%{release}
-Requires:       %libqtorganizer = %{version}-%{release}
-Requires:       %libqtpublishsubscribe = %{version}-%{release}
-Requires:       %libqtsensors = %{version}-%{release}
-Requires:       %libqtserviceframework = %{version}-%{release}
-Requires:       %libqtsysteminfo = %{version}-%{release}
-Requires:       %libqtversit = %{version}-%{release}
-Requires:       %libqtversitorganizer = %{version}-%{release}
+Requires:	%libqtbearer = %{version}-%{release}
+Requires:	%libqtcontacts = %{version}-%{release}
+Requires:	%libqtconnectivity = %{version}-%{release}
+Requires:	%libqtfeedback = %{version}-%{release}
+Requires:	%libqtgallery = %{version}-%{release}
+Requires:	%libqtlocation = %{version}-%{release}
+Requires:	%libqtmultimediakit = %{version}-%{release}
+Requires:	%libqtorganizer = %{version}-%{release}
+Requires:	%libqtpublishsubscribe = %{version}-%{release}
+Requires:	%libqtsensors = %{version}-%{release}
+Requires:	%libqtserviceframework = %{version}-%{release}
+Requires:	%libqtsysteminfo = %{version}-%{release}
+Requires:	%libqtversit = %{version}-%{release}
+Requires:	%libqtversitorganizer = %{version}-%{release}
 
 %description -n %{libnamedev}
 Development files to build applications that use Qt Webkit.
@@ -382,8 +390,8 @@ Example files for the Qt Mobility Framework.
 %{_qt4_plugindir}/sensors/libqtsensors_grueplugin.so
 %endif
 
-%if %{with demos}
 #--------------------------------------------------------------------
+%if %{with demos}
 %package demos
 Summary:	Qt Mobility Framework demos
 Group:		System/X11
