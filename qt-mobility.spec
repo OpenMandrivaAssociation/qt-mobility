@@ -421,7 +421,7 @@ PATH="%{_qt4_bindir}:$PATH"; export PATH
 %install
 %makeinstall INSTALL_ROOT=%{buildroot}
 
-%if %{whith docs}
+%if %{with docs}
 # install docs
 install -d -m 755 %{buildroot}%{_docdir}/html/qtmobility/
 cp -a doc/html/* %{buildroot}%{_docdir}/html/qtmobility/
