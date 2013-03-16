@@ -1,0 +1,149 @@
+Description: Remove rpath
+Author: Zé <ze@mageia.org>
+Original author: Fathi Boudra <fabo@debian.org>
+
+
+--- common.pri.no-rpath	2011-05-10 09:06:01.000000000 +0100
++++ common.pri	2011-07-25 05:11:52.720502730 +0100
+@@ -115,7 +115,6 @@ contains(build_unit_tests, yes) {
+     MOC_DIR = $$OUTPUT_DIR/build/$$SUBDIRPART/$$TARGET/moc
+     RCC_DIR = $$OUTPUT_DIR/build/$$SUBDIRPART/$$TARGET/rcc
+     UI_DIR = $$OUTPUT_DIR/build/$$SUBDIRPART/$$TARGET/ui
+-    QMAKE_RPATHDIR += $$QT_MOBILITY_LIB
+ } else {
+     # Unit test code (no plugins! test plugins are just normal plugins installed elsewhere)
+     testcase:QT *= testlib
+@@ -126,7 +125,6 @@ contains(build_unit_tests, yes) {
+     MOC_DIR = $$OUTPUT_DIR/build/tests/$$SUBDIRPART/$$TARGET/moc
+     RCC_DIR = $$OUTPUT_DIR/build/tests/$$SUBDIRPART/$$TARGET/rcc
+     UI_DIR = $$OUTPUT_DIR/build/tests/$$SUBDIRPART/$$TARGET/ui
+-    QMAKE_RPATHDIR += $$OUTPUT_DIR/lib
+ }
+ 
+ contains(TEMPLATE,.*lib):DEFINES += QT_SHARED
+@@ -136,7 +134,6 @@ maemo6|meego {
+     meego:DEFINES+= Q_WS_MEEGO
+     contains(TEMPLATE,.*app.*): QMAKE_LIB_FLAGS+= -Wl,-rpath-link $$[QT_INSTALL_LIBS]
+     QMAKE_LIB_FLAGS+= -Wl,-rpath-link $$[QT_INSTALL_LIBS]
+-    QMAKE_RPATHDIR += $$[QT_INSTALL_LIBS]
+ }
+ maemo5 {
+     DEFINES+= Q_WS_MAEMO_5
+--- config.tests/qmf/qmf.pro.no-rpath	2011-05-10 09:06:01.000000000 +0100
++++ config.tests/qmf/qmf.pro	2011-07-25 05:12:49.546501051 +0100
+@@ -21,7 +21,6 @@ macx {
+     !isEmpty(QMF_LIBDIR): LIBS += -L $$(QMF_LIBDIR)
+     LIBS += -lqmfclient
+ }
+-!isEmpty(QMF_LIBDIR): QMAKE_RPATHDIR+= $$(QMF_LIBDIR)
+ 
+ # Input
+ SOURCES += main.cpp
+--- examples/videographicsitem/videographicsitem.pro.no-rpath	2011-05-10 09:06:05.000000000 +0100
++++ examples/videographicsitem/videographicsitem.pro	2011-07-25 05:13:41.968499502 +0100
+@@ -7,8 +7,6 @@ include(../mobility_examples.pri)
+ CONFIG += mobility
+ MOBILITY = multimedia
+ 
+-QMAKE_RPATHDIR += $$DESTDIR
+-
+ !symbian:contains(QT_CONFIG, opengl): QT += opengl
+ 
+ HEADERS   += videoplayer.h \
+--- examples/audiodevices/audiodevices.pro.no-rpath	2011-05-10 09:06:04.000000000 +0100
++++ examples/audiodevices/audiodevices.pro	2011-07-25 05:18:40.039490695 +0100
+@@ -7,8 +7,6 @@ include(../mobility_examples.pri)
+ CONFIG += mobility
+ MOBILITY = multimedia
+ 
+-QMAKE_RPATHDIR += $$DESTDIR
+-
+ HEADERS       = audiodevices.h
+ 
+ SOURCES       = audiodevices.cpp \
+--- examples/videowidget/videowidget.pro.no-rpath	2011-05-10 09:06:05.000000000 +0100
++++ examples/videowidget/videowidget.pro	2011-07-25 05:19:11.438489767 +0100
+@@ -7,8 +7,6 @@ include(../mobility_examples.pri)
+ CONFIG += mobility
+ MOBILITY = multimedia
+ 
+-QMAKE_RPATHDIR += $$DESTDIR
+-
+ HEADERS = \
+     videoplayer.h \
+     videowidget.h \
+--- examples/radio/radio.pro.no-rpath	2011-05-10 09:06:05.000000000 +0100
++++ examples/radio/radio.pro	2011-07-25 05:19:27.286489298 +0100
+@@ -7,8 +7,6 @@ include(../mobility_examples.pri)
+ CONFIG += mobility
+ MOBILITY = multimedia
+ 
+-QMAKE_RPATHDIR += $$DESTDIR
+-
+ HEADERS = \
+     radio.h
+   
+--- examples/audiooutput/audiooutput.pro.no-rpath	2011-05-10 09:06:04.000000000 +0100
++++ examples/audiooutput/audiooutput.pro	2011-07-25 05:19:43.759488812 +0100
+@@ -7,8 +7,6 @@ include(../mobility_examples.pri)
+ CONFIG += mobility
+ MOBILITY = multimedia
+ 
+-QMAKE_RPATHDIR += $$DESTDIR
+-
+ HEADERS       = audiooutput.h
+ 
+ SOURCES       = audiooutput.cpp \
+--- examples/audioinput/audioinput.pro.no-rpath	2011-05-10 09:06:04.000000000 +0100
++++ examples/audioinput/audioinput.pro	2011-07-25 05:24:05.232481085 +0100
+@@ -7,8 +7,6 @@ include(../mobility_examples.pri)
+ CONFIG += mobility
+ MOBILITY = multimedia
+ 
+-QMAKE_RPATHDIR += $$DESTDIR
+-
+ HEADERS       = audioinput.h
+ 
+ SOURCES       = audioinput.cpp \
+--- examples/audiorecorder/audiorecorder.pro.no-rpath	2011-05-10 09:06:04.000000000 +0100
++++ examples/audiorecorder/audiorecorder.pro	2011-07-25 05:24:59.076479494 +0100
+@@ -7,8 +7,6 @@ include(../mobility_examples.pri)
+ CONFIG += mobility
+ MOBILITY = multimedia
+ 
+-QMAKE_RPATHDIR += $$DESTDIR
+-
+ HEADERS = \
+     audiorecorder.h
+   
+--- features/basic_examples_setup.pri.no-rpath	2011-05-10 09:06:05.000000000 +0100
++++ features/basic_examples_setup.pri	2011-07-25 05:26:26.313476918 +0100
+@@ -42,7 +42,6 @@ mac:contains(QT_CONFIG,qt_framework) {
+ }
+ QMAKE_LIBDIR = $$OUTPUT_DIR/lib
+ 
+-QMAKE_RPATHDIR+=$$QT_MOBILITY_LIB
+ INCLUDEPATH+= $$QT_MOBILITY_SOURCE_TREE/src/global
+ 
+ maemo6 {
+--- features/mobility.prf.template.no-rpath	2011-05-10 09:06:05.000000000 +0100
++++ features/mobility.prf.template	2011-07-25 05:27:48.310474495 +0100
+@@ -36,8 +36,6 @@ defineTest(qtMobilityAddLibrary) {
+     LIBS+= -L$${MOBILITY_LIB}
+ }
+ 
+-QMAKE_RPATHDIR+=$${MOBILITY_LIB}
+-
+ # versit depends on contacts
+ contains(MOBILITY, versit) {
+     MOBILITY += contacts
+--- tests/messagingex/messagingex.pro.no-rpath	2011-05-10 09:06:16.000000000 +0100
++++ tests/messagingex/messagingex.pro	2011-07-25 05:29:06.055472198 +0100
+@@ -13,7 +13,6 @@ MOBILITY = messaging
+ 
+ maemo5|maemo6 {
+     QMAKE_CXXFLAGS+=-DUSE_TABBED_LAYOUT
+-    QMAKE_RPATHDIR+=$$SOURCE_DIR/lib
+ }
+ 
+ HEADERS += \
