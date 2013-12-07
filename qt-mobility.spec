@@ -40,7 +40,7 @@ Name:		qt-mobility
 Summary:	Qt Mobility Framework
 Group:		Development/Other
 Version:	1.2.0
-Release:	6
+Release:	7
 License:	LGPLv2 with exceptions
 URL:		http://qt.nokia.com/products/qt-addons/mobility
 Source0:	http://get.qt.nokia.com/qt/add-ons/%{name}-opensource-src-%{version}.tar.gz
