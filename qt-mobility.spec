@@ -6,10 +6,9 @@
 %bcond_without demos
 
 %define major 1
-
 %define snap 20110922
 
-%define libnamedev %mklibname %{name} -d
+%define devname %mklibname %{name} -d
 %define libqtbearer %mklibname qtbearer %{major}
 %define libqtcontacts %mklibname qtcontacts %{major}
 %define libqtconnectivity %mklibname qtconnectivity %{major}
@@ -36,13 +35,13 @@
 %define _qt4_importdir		%{_qt4_datadir}/imports
 %define _qt4_translationdir	%{_qt4_datadir}/translations
 
-Name:		qt-mobility
 Summary:	Qt Mobility Framework
+Name:		qt-mobility
 Group:		Development/Other
 Version:	1.2.0
 Release:	8
 License:	LGPLv2 with exceptions
-URL:		http://qt.nokia.com/products/qt-addons/mobility
+Url:		http://qt.nokia.com/products/qt-addons/mobility
 Source0:	http://get.qt.nokia.com/qt/add-ons/%{name}-opensource-src-%{version}.tar.gz
 Patch1:		qt-mobility-opensource-src-1.1.0-pulseaudio-lib.patch
 Patch2:		qt-mobility-1.2.0-no-rpath.patch
@@ -243,11 +242,10 @@ Qt Mobility Framework library.
 %{_qt4_libdir}/libQtVersitOrganizer.so.%{major}*
 
 #--------------------------------------------------------------------
-%package -n %{libnamedev}
+%package -n %{devname}
 Summary:	Qt Mobility Framework development files
 Group:		Development/KDE and Qt
 Provides:	%{name}-devel = %{version}-%{release}
-Provides:	lib%{name}-devel = %{version}-%{release}
 Provides:	qt4-mobility-devel = %{version}-%{release}
 Requires:	%{libqtbearer} = %{version}-%{release}
 Requires:	%{libqtcontacts} = %{version}-%{release}
@@ -264,10 +262,10 @@ Requires:	%{libqtsysteminfo} = %{version}-%{release}
 Requires:	%{libqtversit} = %{version}-%{release}
 Requires:	%{libqtversitorganizer} = %{version}-%{release}
 
-%description -n %{libnamedev}
+%description -n %{devname}
 Development files to build applications that use Qt Webkit.
 
-%files -n %{libnamedev}
+%files -n %{devname}
 %{_qt4_bindir}/icheck
 %{_qt4_bindir}/ndefhandlergen
 %{_qt4_bindir}/qcrmlgen
@@ -428,11 +426,11 @@ Example files for the Qt Mobility Framework.
 PATH="%{_qt4_bindir}:$PATH"; export PATH
 
 ./configure \
-    -prefix %{_qt4_datadir} \
-    -libdir %{_qt4_libdir} \
-    -plugindir %{_qt4_plugindir} \
-    %{?with_examples:-examples} \
-    %{?with_demos:-demos}
+	-prefix %{_qt4_datadir} \
+	-libdir %{_qt4_libdir} \
+	-plugindir %{_qt4_plugindir} \
+	%{?with_examples:-examples} \
+	%{?with_demos:-demos}
 
 %make
 
