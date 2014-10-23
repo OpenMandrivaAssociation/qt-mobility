@@ -423,6 +423,9 @@ Example files for the Qt Mobility Framework.
 %patch50 -p1 -b .translationsdir
 
 %build
+%global optflags %{optflags} -Wno-c++11-narrowing
+%setup_compile_flags
+
 PATH="%{_qt4_bindir}:$PATH"; export PATH
 
 ./configure \
