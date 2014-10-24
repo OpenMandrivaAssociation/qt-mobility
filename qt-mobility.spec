@@ -428,6 +428,10 @@ Example files for the Qt Mobility Framework.
 
 PATH="%{_qt4_bindir}:$PATH"; export PATH
 
+# force gcc for this old crusty
+echo QMAKE_CC=gcc >> staticconfig.pri
+echo QMAKE_CXX=g++ >> staticconfig.pri
+
 ./configure \
 	-prefix %{_qt4_datadir} \
 	-libdir %{_qt4_libdir} \
